@@ -82,7 +82,7 @@ export default class extends React.Component {
   render () {
     return (
       <Card
-        style={{marginBottom: 20}}
+        style={{marginBottom: 16}}
         title={this.props.sender}
         extra={this.props.default && <Tag color="red">默认</Tag>}
         actions={[
