@@ -147,11 +147,13 @@ class Driver
      * send mail
      *
      * @param string|array $to
-     * @return bool
+     * @return array
      */
     public function send($to)
     {
         $this->message->setTo($to);
-        return !!$this->driver->send($this->message);
+        $failers = [];
+        $sent = $this->driver->send($this->message, $failers);
+        return [$sent, $failers];
     }
 }
