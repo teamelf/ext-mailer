@@ -13,3 +13,4 @@
 (new \TeamELF\Ext\Mailer\Listener\AssetsListener())->subscribe();
 (new \TeamELF\Ext\Mailer\Listener\VerifyTokenListener())->subscribe();
 (new \TeamELF\Ext\Mailer\Listener\WelcomeMessageListener())->subscribe();
+(new \TeamELF\Ext\Mailer\Listener\MessageListener())->subscribe();
