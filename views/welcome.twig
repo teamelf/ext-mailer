@@ -1,14 +1,4 @@
-{% extends "@ext-mailer/base.twig" %}
-
-{% block body %}
-  <h2 align="center">{{ name }}</h2>
-  <h2 align="center">欢迎加入 {{ config.name }} ！！</h2>
-  <div style="padding: 20px 0">
-    <div align="center">您的用户名是</div>
-    <h2 align="center">{{ username }}</h2>
-  </div>
-  <div style="padding: 20px 0">
-    <div align="center">请进入登陆系统设置密码</div>
-    {#<div align="center">{{ url }}</div>#}
-  </div>
-{% endblock %}
+<div>欢迎 {{ name }} 加入 {{ config.name }}</div>
+<div>您的用户名是 {{ username }}</div>
+<div>请进入登陆系统设置密码</div>
+<div>{{ url }}</div>

@@ -25,7 +25,7 @@ class WelcomeMessageListener
     {
         $member = $event->getMember();
         Driver::createWithDefaultMailer()
-            ->subject('欢迎')
+            ->subject('欢迎 ' . $member->getName())
             ->view('@ext-mailer/welcome.twig', [
                 'name' => $member->getName(),
                 'username' => $member->getUsername(),

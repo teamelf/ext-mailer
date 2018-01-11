@@ -125,19 +125,6 @@ class Driver
      */
     public function view($template, $data = [])
     {
-        $config = Config::get();
-        $data['embed'] = [
-            'logo' => $this->message->embed(new \Swift_Image(
-                file_get_contents(env('BASE_URL') . $config['logo']),
-                'logo.png',
-                'image/png'
-            )),
-            'bg' => $this->message->embed(new \Swift_Image(
-                file_get_contents(env('BASE_URL') . $config['bg']),
-                'bg.png',
-                'image/png'
-            ))
-        ];
         $html = ViewService::getEngine()->render($template, $data);
         $this->message->setBody($html, 'text/html');
         return $this;

@@ -24,11 +24,10 @@ class VerifyTokenListener
     public function handler(VerifyTokenNeedsToBeSent $event)
     {
         $member = $event->getMember();
-        $token = $event->getToken();
         Driver::createWithDefaultMailer()
             ->subject('重置密码')
             ->view('@ext-mailer/token.twig', [
-                'token' => $token->getId()
+                'token' => $event->getToken()
             ])->send($member->getEmail());
     }
 }

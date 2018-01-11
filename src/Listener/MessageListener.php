@@ -25,9 +25,7 @@ class MessageListener
     {
         Driver::createWithDefaultMailer()
             ->subject($event->getSubject())
-            ->view('@ext-mailer/message.twig', [
-                'body' => $event->getBody(),
-                'sender' => $event->getSender()
-            ])->send($event->getReceivers());
+            ->body($event->getBody())
+            ->send($event->getReceivers());
     }
 }

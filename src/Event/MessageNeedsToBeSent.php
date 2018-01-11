@@ -30,15 +30,12 @@ class MessageNeedsToBeSent extends AbstractEvent
      */
     protected $body = null;
 
-    protected $sender;
-
-    function __construct($receivers, $subject, $body, $sender)
+    function __construct($receivers, $subject, $body)
     {
         parent::__construct();
         $this->subject = $subject;
         $this->receivers = $receivers;
         $this->body = $body;
-        $this->sender = $sender;
     }
 
     /**
@@ -63,13 +60,5 @@ class MessageNeedsToBeSent extends AbstractEvent
     public function getBody()
     {
         return $this->body;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSender()
-    {
-        return $this->sender;
     }
 }
