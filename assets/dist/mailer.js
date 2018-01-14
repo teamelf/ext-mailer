@@ -346,7 +346,7 @@ System.register('teamelf/mailer/MailerCardItem', ['teamelf/components/InfoEditor
             return React.createElement(
               Card,
               {
-                style: { marginBottom: 20 },
+                style: { marginBottom: 16 },
                 title: this.props.sender,
                 extra: this.props.default && React.createElement(
                   Tag,
@@ -437,25 +437,14 @@ System.register('teamelf/mailer/MailerCardItem', ['teamelf/components/InfoEditor
 });
 'use strict';
 
-System.register('teamelf/mailer/main', ['teamelf/mailer/Mailer', 'teamelf/App', 'teamelf/layout/SideNav', 'teamelf/Permission'], function (_export, _context) {
+System.register('teamelf/mailer/main', ['teamelf/common/extend', 'teamelf/mailer/Mailer', 'teamelf/App', 'teamelf/layout/SideNav', 'teamelf/Permission'], function (_export, _context) {
   "use strict";
 
-  var Mailer, App, SideNav, Permission;
-
-  function _toConsumableArray(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
-        arr2[i] = arr[i];
-      }
-
-      return arr2;
-    } else {
-      return Array.from(arr);
-    }
-  }
-
+  var extend, Mailer, App, SideNav, Permission;
   return {
-    setters: [function (_teamelfMailerMailer) {
+    setters: [function (_teamelfCommonExtend) {
+      extend = _teamelfCommonExtend.default;
+    }, function (_teamelfMailerMailer) {
       Mailer = _teamelfMailerMailer.default;
     }, function (_teamelfApp) {
       App = _teamelfApp.default;
@@ -465,18 +454,25 @@ System.register('teamelf/mailer/main', ['teamelf/mailer/Mailer', 'teamelf/App', 
       Permission = _teamelfPermission.default;
     }],
     execute: function () {
-      /**
-       * This file is part of TeamELF
-       *
-       * (c) GuessEver <guessever@gmail.com>
-       *
-       * For the full copyright and license information, please view the LICENSE
-       * file that was distributed with this source code.
-       */
 
-      App.prototype.routes = [].concat(_toConsumableArray(App.prototype.routes || []), [{ path: '/mailer', exact: true, component: Mailer }]);
-      SideNav.prototype.navigations = [].concat(_toConsumableArray(SideNav.prototype.navigations || []), [{ path: '/mailer', icon: 'mail', title: '发信邮箱' }]);
-      Permission.prototype.permissions = [].concat(_toConsumableArray(Permission.prototype.permissions || []), [{ name: '查看发信邮箱列表', permission: 'mailer.list' }, { name: '创新发信邮箱', permission: 'mailer.create' }, { name: '更新发信邮箱', permission: 'mailer.update' }, { name: '删除发信邮箱', permission: 'mailer.delete' }]);
+      extend(App.prototype, 'routes', function (routes) {
+        routes.push.apply(routes, [{ path: '/mailer', exact: true, component: Mailer }]);
+      }); /**
+           * This file is part of TeamELF
+           *
+           * (c) GuessEver <guessever@gmail.com>
+           *
+           * For the full copyright and license information, please view the LICENSE
+           * file that was distributed with this source code.
+           */
+
+      extend(SideNav.prototype, 'navigations', function (navigations) {
+        navigations.push.apply(navigations, [{ path: '/mailer', icon: 'mail', title: '发信邮箱' }]);
+      });
+
+      extend(Permission.prototype, 'permissions', function (permissions) {
+        permissions.push.apply(permissions, [{ name: '查看发信邮箱列表', permission: 'mailer.list' }, { name: '创新发信邮箱', permission: 'mailer.create' }, { name: '更新发信邮箱', permission: 'mailer.update' }, { name: '删除发信邮箱', permission: 'mailer.delete' }]);
+      });
     }
   };
 });
