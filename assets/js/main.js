@@ -26,10 +26,13 @@ extend(SideNav.prototype, 'navigations', navigations => {
 });
 
 extend(Permission.prototype, 'permissions', permissions => {
-  permissions.push(...[
-    {name: '查看发信邮箱列表', permission: 'mailer.list'},
-    {name: '创新发信邮箱', permission: 'mailer.create'},
-    {name: '更新发信邮箱', permission: 'mailer.update'},
-    {name: '删除发信邮箱', permission: 'mailer.delete'},
-  ]);
+  permissions.push({
+    name: '发信邮箱',
+    children: [
+      {name: '查看发信邮箱列表', permission: 'mailer.list'},
+      {name: '创新发信邮箱', permission: 'mailer.create'},
+      {name: '更新发信邮箱', permission: 'mailer.update'},
+      {name: '删除发信邮箱', permission: 'mailer.delete'}
+    ]
+  });
 });
