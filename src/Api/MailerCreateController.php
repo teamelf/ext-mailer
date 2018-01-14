@@ -38,7 +38,7 @@ class MailerCreateController extends AbstractController
             'sender' => 'sender',
             'remark' => ''
         ]);
-        if (count(Mailer::all()) === 0) {
+        if (Mailer::count() === 0) {
             $mailer->default(true);
         }
         $mailer->save();
