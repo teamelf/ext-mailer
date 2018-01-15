@@ -133,7 +133,8 @@ System.register('teamelf/mailer/Mailer', ['teamelf/layout/Page', 'teamelf/mailer
               {
                 type: 'primary',
                 icon: 'mail',
-                onClick: this.createMailer.bind(this)
+                onClick: this.createMailer.bind(this),
+                disabled: !can('mailer.create')
               },
               '\u65B0\u5EFA\u53D1\u4FE1\u90AE\u7BB1'
             )];
@@ -357,7 +358,7 @@ System.register('teamelf/mailer/MailerCardItem', ['teamelf/components/InfoEditor
                   Button,
                   {
                     ghost: true, type: 'primary',
-                    disabled: this.props.default,
+                    disabled: this.props.default || !can('mailer.update'),
                     onClick: this.setAsDefault.bind(this)
                   },
                   '\u8BBE\u4E3A\u9ED8\u8BA4'
@@ -365,7 +366,8 @@ System.register('teamelf/mailer/MailerCardItem', ['teamelf/components/InfoEditor
                   Button,
                   {
                     type: 'danger',
-                    onClick: this.delete.bind(this)
+                    onClick: this.delete.bind(this),
+                    disabled: !can('mailer.delete')
                   },
                   '\u5220\u9664'
                 )]
@@ -375,44 +377,52 @@ System.register('teamelf/mailer/MailerCardItem', ['teamelf/components/InfoEditor
                 value: this.props.driver,
                 onEdit: this.edit.bind(this, 'driver'),
                 type: 'radio',
-                options: [{ label: 'SMTP', value: 'smtp' }]
+                options: [{ label: 'SMTP', value: 'smtp' }],
+                readonly: !can('mailer.update')
               }),
               React.createElement(InfoEditor, {
                 label: '\u4E3B\u673A',
                 value: this.props.host,
-                onEdit: this.edit.bind(this, 'host')
+                onEdit: this.edit.bind(this, 'host'),
+                readonly: !can('mailer.update')
               }),
               React.createElement(InfoEditor, {
                 label: '\u7AEF\u53E3',
                 value: this.props.port,
-                onEdit: this.edit.bind(this, 'port')
+                onEdit: this.edit.bind(this, 'port'),
+                readonly: !can('mailer.update')
               }),
               React.createElement(InfoEditor, {
                 label: '\u52A0\u5BC6\u65B9\u5F0F',
                 value: this.props.encryption,
                 onEdit: this.edit.bind(this, 'encryption'),
                 type: 'radio',
-                options: [{ label: 'SSL', value: 'ssl' }, { label: 'TLS', value: 'tls' }, { label: '不加密', value: '' }]
+                options: [{ label: 'SSL', value: 'ssl' }, { label: 'TLS', value: 'tls' }, { label: '不加密', value: '' }],
+                readonly: !can('mailer.update')
               }),
               React.createElement(InfoEditor, {
                 label: '\u767B\u5F55\u540D',
                 value: this.props.username,
-                onEdit: this.edit.bind(this, 'username')
+                onEdit: this.edit.bind(this, 'username'),
+                readonly: !can('mailer.update')
               }),
               React.createElement(InfoEditor, {
                 label: '\u5BC6\u7801',
                 value: this.props.password,
-                onEdit: this.edit.bind(this, 'password')
+                onEdit: this.edit.bind(this, 'password'),
+                readonly: !can('mailer.update')
               }),
               React.createElement(InfoEditor, {
                 label: '\u53D1\u4FE1\u90AE\u7BB1',
                 value: this.props.sender,
-                onEdit: this.edit.bind(this, 'sender')
+                onEdit: this.edit.bind(this, 'sender'),
+                readonly: !can('mailer.update')
               }),
               React.createElement(InfoEditor, {
                 label: '\u5907\u6CE8',
                 value: this.props.remark,
-                onEdit: this.edit.bind(this, 'remark')
+                onEdit: this.edit.bind(this, 'remark'),
+                readonly: !can('mailer.update')
               }),
               React.createElement(
                 Button,
@@ -420,7 +430,8 @@ System.register('teamelf/mailer/MailerCardItem', ['teamelf/components/InfoEditor
                   className: 'full',
                   loading: this.testBtnStatus[this.state.status].loading,
                   type: this.testBtnStatus[this.state.status].type,
-                  onClick: this.testConnection.bind(this)
+                  onClick: this.testConnection.bind(this),
+                  disabled: !can('mailer.update')
                 },
                 this.testBtnStatus[this.state.status].text
               )
@@ -467,7 +478,9 @@ System.register('teamelf/mailer/main', ['teamelf/common/extend', 'teamelf/mailer
            */
 
       extend(SideNav.prototype, 'navigations', function (navigations) {
-        navigations.push.apply(navigations, [{ path: '/mailer', icon: 'mail', title: '发信邮箱' }]);
+        if (can('mailer.*')) {
+          navigations.push({ path: '/mailer', icon: 'mail', title: '发信邮箱' });
+        }
       });
 
       extend(Permission.prototype, 'permissions', function (permissions) {

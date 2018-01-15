@@ -88,12 +88,13 @@ export default class extends React.Component {
         actions={[
           <Button
             ghost type="primary"
-            disabled={this.props.default}
+            disabled={this.props.default || !can('mailer.update')}
             onClick={this.setAsDefault.bind(this)}
           >设为默认</Button>,
           <Button
             type="danger"
             onClick={this.delete.bind(this)}
+            disabled={!can('mailer.delete')}
           >删除</Button>
         ]}
       >
@@ -107,16 +108,19 @@ export default class extends React.Component {
             // {label: 'POP3', value: 'pop3'},
             // {label: 'IMAP', value: 'imap'}
           ]}
+          readonly={!can('mailer.update')}
         />
         <InfoEditor
           label="主机"
           value={this.props.host}
           onEdit={this.edit.bind(this, 'host')}
+          readonly={!can('mailer.update')}
         />
         <InfoEditor
           label="端口"
           value={this.props.port}
           onEdit={this.edit.bind(this, 'port')}
+          readonly={!can('mailer.update')}
         />
         <InfoEditor
           label="加密方式"
@@ -128,32 +132,38 @@ export default class extends React.Component {
             {label: 'TLS', value: 'tls'},
             {label: '不加密', value: ''}
           ]}
+          readonly={!can('mailer.update')}
         />
         <InfoEditor
           label="登录名"
           value={this.props.username}
           onEdit={this.edit.bind(this, 'username')}
+          readonly={!can('mailer.update')}
         />
         <InfoEditor
           label="密码"
           value={this.props.password}
           onEdit={this.edit.bind(this, 'password')}
+          readonly={!can('mailer.update')}
         />
         <InfoEditor
           label="发信邮箱"
           value={this.props.sender}
           onEdit={this.edit.bind(this, 'sender')}
+          readonly={!can('mailer.update')}
         />
         <InfoEditor
           label="备注"
           value={this.props.remark}
           onEdit={this.edit.bind(this, 'remark')}
+          readonly={!can('mailer.update')}
         />
         <Button
           className="full"
           loading={this.testBtnStatus[this.state.status].loading}
           type={this.testBtnStatus[this.state.status].type}
           onClick={this.testConnection.bind(this)}
+          disabled={!can('mailer.update')}
         >{this.testBtnStatus[this.state.status].text}</Button>
       </Card>
     );

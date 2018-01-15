@@ -20,9 +20,9 @@ extend(App.prototype, 'routes', routes => {
 });
 
 extend(SideNav.prototype, 'navigations', navigations => {
-  navigations.push(...[
-    {path: '/mailer', icon: 'mail', title: '发信邮箱'}
-  ]);
+  if (can('mailer.*')) {
+    navigations.push({path: '/mailer', icon: 'mail', title: '发信邮箱'});
+  }
 });
 
 extend(Permission.prototype, 'permissions', permissions => {

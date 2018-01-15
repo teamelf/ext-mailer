@@ -40,9 +40,10 @@ export default class extends Page {
     return [
       <p>默认发信邮箱将作为重设密码、站内消息等发送邮箱</p>,
       <Button
-        type="primary"
-        icon="mail"
-        onClick={this.createMailer.bind(this)}
+      type="primary"
+      icon="mail"
+      onClick={this.createMailer.bind(this)}
+      disabled={!can('mailer.create')}
       >新建发信邮箱</Button>
     ];
   }
