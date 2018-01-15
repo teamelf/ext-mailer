@@ -32,6 +32,7 @@ class MailerDeleteController extends AbstractController
         if (!$mailer) {
             throw new HttpForbiddenException();
         }
+        $this->log('info', 'Delete mailer [' . $mailer->getSender() . ']');
         $mailer->delete(true);
         return response();
     }

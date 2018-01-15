@@ -42,6 +42,7 @@ class MailerCreateController extends AbstractController
             $mailer->default(true);
         }
         $mailer->save();
+        $this->log('info', 'Create a mailer [' . $mailer->getSender() . ']');
         return response([
             'id' => $mailer->getId()
         ]);

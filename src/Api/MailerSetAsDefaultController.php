@@ -36,6 +36,7 @@ class MailerSetAsDefaultController extends AbstractController
             $m->default(false)->save();
         }
         $mailer->default(true)->save();
+        $this->log('info', 'Set mailer [' . $mailer->getSender() . '] as default');
         return response();
     }
 }

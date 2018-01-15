@@ -46,6 +46,7 @@ class MailerUpdateController extends AbstractController
             throw new HttpForbiddenException();
         }
         $mailer->update($data);
+        $this->log('info', 'Update mailer [' . $mailer->getSender() . ']');
         return response();
     }
 }
