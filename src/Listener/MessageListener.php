@@ -12,7 +12,7 @@
 namespace TeamELF\Ext\Mailer\Listener;
 
 use TeamELF\Ext\Mailer\Driver;
-use TeamELF\Ext\Mailer\Event\MessageNeedsToBeSent;
+use TeamELF\Event\MessageNeedsToBeSent;
 
 class MessageListener
 {
