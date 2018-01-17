@@ -23,9 +23,13 @@ class MessageListener
 
     public function handler(MessageNeedsToBeSent $event)
     {
+        $receivers = [];
+        foreach ($event->getReceivers() as $receiver) {
+            $receivers[] = $receiver->getEmail();
+        }
         Driver::createWithDefaultMailer()
             ->subject($event->getSubject())
             ->body($event->getBody())
-            ->send($event->getReceivers());
+            ->send($receivers);
     }
 }
